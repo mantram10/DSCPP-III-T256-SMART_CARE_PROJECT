@@ -8,15 +8,21 @@
 
 SmartCare is a healthcare management system developed as a
 
+
+
 Phase-I PBL prototype using C++ Object-Oriented Programming
+
+
 
 and Data Structures.
 
 
 
-The system provides basic functionality for managing patients,
+SmartCare provides functionality for managing patients,
 
-doctors, appointments, and emergency cases.
+
+
+doctors, appointments and emergency cases.
 
 
 
@@ -24,21 +30,33 @@ doctors, appointments, and emergency cases.
 
 
 
-The current Phase-I prototype includes:
+SmartCares current Phase-I prototype includes:
 
 
 
 \- Patient Management
 
+
+
 \- Doctor Management
+
+
 
 \- Patient Search
 
+
+
 \- Doctor Management
+
+
 
 \- Appointment Management
 
+
+
 \- Emergency Case Management
+
+
 
 \- Recent Action Tracking
 
@@ -54,9 +72,15 @@ The following classes are implemented:
 
 \- Patient
 
+
+
 \- Doctor
 
+
+
 \- Appointment
+
+
 
 \- Emergency
 
@@ -68,19 +92,33 @@ The following classes are implemented:
 
 | Data Structure | Purpose in SmartCare |
 
+
+
 |---|---|
 
-| Linked List | Stores patient records |
 
-| Hash Table | Fast patient searching |
+
+Linked List. Stores patient records |
+
+
+
+| Hash Table | Fast patient searching
+
+
 
 | Queue | Manages appointments |
 
+
+
 | Priority Queue | Processes emergency cases |
 
-| Stack | Stores recent actions |
 
-| Vector | Stores doctor records |
+
+| Stack | Stores actions |
+
+
+
+| Vector | Stores doctor records
 
 
 
@@ -92,19 +130,27 @@ The emergency cases are classified into five priority levels:
 
 
 
-1\. Critical - Immediate life-threatening condition
-
-2\. Very Serious - Urgent treatment required
-
-3\. Serious - Prompt medical attention required
-
-4\. Moderate - Medical attention required
-
-5\. Low - Non-urgent condition
+1\. Immediate life-threatening condition
 
 
 
-Priority 1 is processed before Priority 2, 3, 4, and 5.
+2\. Very Serious. Urgent treatment required
+
+
+
+3\. Prompt medical attention required
+
+
+
+4\. Medical attention required
+
+
+
+5\. Low. Non-urgent condition
+
+
+
+Priority 1 is processed before Priority 2 3 4 and 5.
 
 
 
@@ -114,9 +160,15 @@ Priority 1 is processed before Priority 2, 3, 4, and 5.
 
 \- C++
 
+
+
 \- Object-Oriented Programming
 
+
+
 \- Data Structures and Algorithms
+
+
 
 \- Dev-C++
 
@@ -130,9 +182,13 @@ Priority 1 is processed before Priority 2, 3, 4, and 5.
 
 
 
-The Phase-I implementation focuses on developing and
+SmartCares Phase-I implementation focuses on developing and
+
+
 
 demonstrating the core C++ OOP and Data Structure components
+
+
 
 of the SmartCare healthcare management system.
 
@@ -142,23 +198,37 @@ of the SmartCare healthcare management system.
 
 
 
-The following features are planned for subsequent phases:
+The following features are planned for phases:
 
 
 
 \- Medical Record Management
 
+
+
 \- PostgreSQL Database Integration
+
+
 
 \- Firebase/Cloud Integration
 
+
+
 \- Python-generated simulated datasets
+
+
 
 \- Hospital Network using Graph
 
+
+
 \- BFS for hospital search
 
-\- DFS for hospital network exploration
+
+
+\- DFS, for hospital network exploration
+
+
 
 \- Testing and Performance Analysis
 
@@ -174,7 +244,9 @@ No real patient information is used.
 
 Simulated healthcare data may be generated using Python in
 
-subsequent phases for testing the SmartCare application.
+
+
+phases for testing the SmartCare application.
 
 
 
@@ -182,5 +254,5 @@ subsequent phases for testing the SmartCare application.
 
 
 
-Phase-I prototype completed with basic OOP and DSA implementation.
+Phase-I prototype completed with OOP and DSA implementation.
 
