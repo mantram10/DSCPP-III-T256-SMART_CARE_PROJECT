@@ -26,8 +26,8 @@ public:
     {
         id = i;
         name = n;
-        age = a;
-        gender = g;
+        age=a;
+        gender=g;
     }
 
     void display() const
