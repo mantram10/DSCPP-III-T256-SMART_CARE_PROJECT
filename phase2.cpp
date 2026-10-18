@@ -64,8 +64,7 @@ public:
         psqlPath =
             "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.exe";
 
-        // Replace YOUR_PASSWORD with your PostgreSQL password.
-        // IMPORTANT: Do not upload the real password to GitHub.
+  
         _putenv("PGPASSWORD=admin");
 
         cout << "\nConnecting to PostgreSQL...\n";
