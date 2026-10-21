@@ -1,0 +1,51 @@
+doctor_id,name,specialization
+201,Dr. Vikram Chawla,Cardiology
+202,Dr. Neelam Saxena,Neurology
+203,Dr. Karan Oberoi,Orthopedics
+204,Dr. Shalini Arora,Dermatology
+205,Dr. Abhishek Tandon,Pediatrics
+206,Dr. Pankaj Bansal,Gynecology
+207,Dr. Ritu Mahajan,Ophthalmology
+208,Dr. Mohit Suri,Psychiatry
+209,Dr. Deepika Menon,ENT
+210,Dr. Tarun Bhardwaj,General Medicine
+211,Dr. Nitin Ahuja,Emergency Medicine
+212,Dr. Swati Ghosh,Oncology
+213,Dr. Akash Dutta,Nephrology
+214,Dr. Monica Bedi,Gastroenterology
+215,Dr. Chirag Anand,Pulmonology
+216,Dr. Pallavi Desai,Endocrinology
+217,Dr. Saurabh Saxena,Urology
+218,Dr. Komal Sood,Radiology
+219,Dr. Abhinav Kohli,Anesthesiology
+220,Dr. Bhavna Arora,Pathology
+221,Dr. Rajeev Puri,Infectious Diseases
+222,Dr. Shweta Kulkarni,Rheumatology
+223,Dr. Amitabh Sen,Plastic Surgery
+224,Dr. Garima Sethi,General Surgery
+225,Dr. Keshav Prasad,Family Medicine
+226,Dr. Namrata Pillai,Cardiology
+227,Dr. Lokesh Yadav,Neurology
+228,Dr. Charu Wadhwa,Orthopedics
+229,Dr. Sameer Qureshi,Dermatology
+230,Dr. Ekta Bhalla,Pediatrics
+231,Dr. Dinesh Tripathi,Gynecology
+232,Dr. Aparna Mukherjee,Ophthalmology
+233,Dr. Manish Talwar,Psychiatry
+234,Dr. Sonal Aggarwal,ENT
+235,Dr. Harshit Vohra,General Medicine
+236,Dr. Rachna Iqbal,Emergency Medicine
+237,Dr. Tejas Kulkarni,Oncology
+238,Dr. Nandini Roy,Nephrology
+239,Dr. Pratik Goyal,Gastroenterology
+240,Dr. Alka Bhatnagar,Pulmonology
+241,Dr. Shashank Tyagi,Endocrinology
+242,Dr. Mitali Fernandes,Urology
+243,Dr. Yuvraj Sinha,Radiology
+244,Dr. Swarnima Kaul,Anesthesiology
+245,Dr. Anirudh Batra,Pathology
+246,Dr. Reema Thomas,Infectious Diseases
+247,Dr. Jayant Bhatt,Rheumatology
+248,Dr. Sonali Chatterjee,Plastic Surgery
+249,Dr. Faisal Mirza,General Surgery
+250,Dr. Trisha D'Souza,Family Medicine
