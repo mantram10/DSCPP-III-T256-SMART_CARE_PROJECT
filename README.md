@@ -26,6 +26,8 @@ SmartCare is a healthcare management system that we are building as part of our 
 
 - We have successfully tested uploading the database snapshot to GitHub.
 
+- We have successfully created our Frontend website to showcase the Data in a user-friendly manner to manage the data efficiently.
+
 ### Database Integration
 
 PostgreSQL is the database for SmartCare. Records that SmartCare adds through the application are stored in PostgreSQL after each database operation.
@@ -72,8 +74,4 @@ The synchronization script has been tested manually. We still need to set up and
 
 - **Dataset Generation:** Python
 
-- **Database Synchronization:** PowerShell, Git and GitHub
-
-### Data Security
-
-The project uses data for academic testing. Database snapshots must not contain patient information, passwords or other sensitive data. PostgreSQL remains the database while GitHub stores the source code and the versioned database snapshots.
+- **Database Synchronization:** PowerShell, Git and GitHub , Windows Task Scheduler
