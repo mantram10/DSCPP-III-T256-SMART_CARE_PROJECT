@@ -13,12 +13,6 @@
 using namespace std;
 
 
-// ============================================================
-// DATABASE CLASS
-// PostgreSQL integration using psql.exe
-// Compatible with Dev-C++ 5.11
-// ============================================================
-
 class Database
 {
 private:
