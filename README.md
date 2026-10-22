@@ -2,7 +2,7 @@
 
 SmartCare is a healthcare management system that we are building as part of our Project-Based Learning (PBL). The project relies on Object‑Oriented Programming (OOP) Data Structures and Algorithms (DSA) and PostgreSQL to keep track of healthcare records.
 
-### Completed Work
+### Complted Work
 
 - We have built the C++ application with a menu‑driven interface.
 
