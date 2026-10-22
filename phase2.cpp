@@ -1250,15 +1250,11 @@ int main()
             cout << "\nThank you for using SmartCare!\n";
         }
 
-
         else
         {
             cout << "\nInvalid choice.\n";
         }
 
-
     } while (choice != 0);
-
-
     return 0;
 }
