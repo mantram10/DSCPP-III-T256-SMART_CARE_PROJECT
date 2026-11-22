@@ -1,0 +1,38 @@
+# --- Secrets: never commit ---
+config/set_env.ps1
+*.env
+.env*
+*serviceAccount*.json
+*firebase-adminsdk*.json
+*.pem
+*.key
+
+# --- Build output ---
+*.exe
+*.o
+*.obj
+*.pdb
+build/
+
+# --- Runtime temp files written by SmartCare ---
+smartcare_temp.sql
+smartcare_patients.csv
+smartcare_doctors.csv
+sc_fb_*.json
+sc_fb_*.txt
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Local launcher settings
+config/local_env.bat
+
+# Files SmartCare writes while running, and local backups/results
+smartcare_appointments.csv
+smartcare_emergency.csv
+backup/
+tests/results_*.txt
+tests/*_results.csv
