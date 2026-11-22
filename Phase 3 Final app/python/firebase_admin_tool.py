@@ -1,5 +1,5 @@
 """
-SmartCare Phase 3 - Firebase admin tool (run by the project team only).
+SmartCare Phase 3 - Firebase admin tool (run by the project team only)
 
 Requires:  pip install -r python/requirements.txt
 Environment (never commit these values):
