@@ -1,5 +1,5 @@
 """
-SmartCare Phase 3 - patient record validation (Python side).
+SmartCare Phase 3 - patient record validation (Python side)
 
 These rules intentionally mirror cloud/cloud_import.h in C++.
 Python validates BEFORE upload; C++ validates again AFTER download,
