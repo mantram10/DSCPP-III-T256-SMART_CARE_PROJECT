@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Error{% endblock %}{% block heading %}Something went wrong{% endblock %}
+{% block content %}<div class="flash error">{{ message }}</div>
+<p>Check that PostgreSQL is running and the <code>smartcare</code> database exists.</p>
+<a class="btn" href="{{ url_for('dashboard') }}">Back to dashboard</a>{% endblock %}

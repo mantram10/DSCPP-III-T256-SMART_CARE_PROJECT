@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Edit patient{% endblock %}{% block heading %}Edit patient #{{ p.patient_id }}{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <form method="post" class="form-col">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Patient ID<input value="{{ p.patient_id }}" disabled></label>
+    <label>Source<input value="{{ p.source }}" disabled></label>
+    <label>Name<input name="name" maxlength="100" value="{{ p.name }}" required></label>
+    <label>Age<input name="age" type="number" min="0" max="120" value="{{ p.age }}" required></label>
+    <label>Gender<select name="gender">{% for g, n in [('M','Male'),('F','Female'),('O','Other')] %}<option value="{{ g }}" {{ 'selected' if (p.gender or '')|trim == g }}>{{ n }}</option>{% endfor %}</select></label>
+    <div class="form-row"><button class="btn primary">Save</button><a class="btn ghost" href="{{ url_for('patient_detail', pid=p.patient_id) }}">Cancel</a></div>
+  </form>
+</section>
+{% endblock %}

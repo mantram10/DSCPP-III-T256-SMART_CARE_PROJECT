@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% from '_macros.html' import data_table, post_button with context %}
+{% block title %}Emergency{% endblock %}{% block heading %}Emergency <small>most urgent first</small>{% endblock %}
+{% block content %}
+<section class="card"><h2>Add emergency case</h2>
+  <form method="post" action="{{ url_for('emergency_add') }}" class="form-row">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Patient ID<input name="patient_id" type="number" min="1" required></label>
+    <label class="grow">Priority<select name="priority">{% for n, label in priority_names.items() %}<option value="{{ n }}">{{ n }} {{ label }}</option>{% endfor %}</select></label>
+    <button class="btn primary">Add case</button>
+  </form>
+</section>
+<section class="card">
+  <div class="card-head"><h2>Waiting cases <small>ordered by priority, then arrival</small></h2>
+    {{ post_button(url_for('emergency_process'), 'Process most urgent', 'btn danger') }}</div>
+  {{ data_table(waiting, cols, 'No emergency cases waiting.', false, 'priority', winfo) }}
+</section>
+<section class="card"><h2>History</h2>{{ data_table(history, hcols, 'No processed cases yet.', false, None, hinfo) }}</section>
+{% endblock %}

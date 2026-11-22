@@ -1,0 +1,23 @@
+{% extends 'base.html' %}{% from '_macros.html' import data_table, post_button with context %}
+{% block title %}Doctors{% endblock %}{% block heading %}Doctors{% endblock %}
+{% block content %}
+<section class="card"><h2>Add doctor</h2>
+  <form method="post" action="{{ url_for('doctor_add') }}" class="form-row">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Doctor ID<input name="doctor_id" type="number" min="1" max="99999" required></label>
+    <label class="grow">Name<input name="name" maxlength="100" required></label>
+    <label class="grow">Specialization<input name="specialization" maxlength="100" required></label>
+    <button class="btn primary">Add doctor</button>
+  </form>
+</section>
+<section class="card">
+  <form method="get" class="form-row">
+    <label class="grow">Search by ID, name or specialization<input name="q" value="{{ q }}" placeholder="e.g. Cardiology"></label>
+    <button class="btn">Search</button>{% if q %}<a class="btn ghost" href="{{ url_for('doctors') }}">Clear</a>{% endif %}
+  </form>
+  {% call(r) data_table(rows, cols, 'No doctors found.', true, None, info) %}
+    <a class="btn small" href="{{ url_for('doctor_edit', did=r.doctor_id) }}">Edit</a>
+    {{ post_button(url_for('doctor_delete', did=r.doctor_id), 'Delete', 'btn small danger', 'Delete doctor ' ~ r.doctor_id ~ '?') }}
+  {% endcall %}
+</section>
+{% endblock %}

@@ -1,0 +1,31 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "SmartCare": {
+      "Hospital_A": {
+        ".read": "auth != null && auth.token.hospital === 'Hospital_A'"
+      },
+      "Hospital_B": {
+        ".read": "auth != null && auth.token.hospital === 'Hospital_B'"
+      },
+      "Hospital_C": {
+        ".read": "auth != null && auth.token.hospital === 'Hospital_C'"
+      },
+      "Hospital_D": {
+        ".read": "auth != null && auth.token.hospital === 'Hospital_D'"
+      },
+      "Hospital_E": {
+        ".read": "auth != null && auth.token.hospital === 'Hospital_E'"
+      },
+      "Shared_Records": {
+        "$target": {
+          ".read": "auth != null && auth.token.hospital === $target",
+          "$key": {
+            ".write": "auth != null && $target !== auth.token.hospital && ((!newData.exists() && data.child('source_hospital').val() === auth.token.hospital) || (newData.child('source_hospital').val() === auth.token.hospital && newData.child('shared_with').val() === $target && newData.child('consent').val() === true && root.child('SmartCare/' + auth.token.hospital + '/Patients/' + $key).exists() && newData.child('patient_id').val() === root.child('SmartCare/' + auth.token.hospital + '/Patients/' + $key + '/patient_id').val() && newData.child('name').val() === root.child('SmartCare/' + auth.token.hospital + '/Patients/' + $key + '/name').val() && newData.child('age').val() === root.child('SmartCare/' + auth.token.hospital + '/Patients/' + $key + '/age').val() && newData.child('gender').val() === root.child('SmartCare/' + auth.token.hospital + '/Patients/' + $key + '/gender').val()))"
+          }
+        }
+      }
+    }
+  }
+}

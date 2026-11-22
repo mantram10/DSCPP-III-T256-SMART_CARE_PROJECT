@@ -1,0 +1,21 @@
+{% extends 'base.html' %}{% from '_macros.html' import data_table, post_button with context %}
+{% block title %}Appointments{% endblock %}{% block heading %}Appointments <small>first in, first out</small>{% endblock %}
+{% block content %}
+<section class="card"><h2>Book appointment</h2>
+  <form method="post" action="{{ url_for('appointment_book') }}" class="form-row">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Patient ID<input name="patient_id" type="number" min="1" required></label>
+    <label>Doctor ID<input name="doctor_id" type="number" min="1" required></label>
+    <a class="small" href="{{ url_for('doctors') }}" target="_blank">Find a doctor ID</a>
+    <button class="btn primary">Book</button>
+  </form>
+</section>
+<section class="card">
+  <div class="card-head"><h2>Waiting queue <small>front = top</small></h2>
+    {{ post_button(url_for('appointment_process'), 'Process next appointment', 'btn primary') }}</div>
+  {% call(r) data_table(waiting, cols, 'No appointments waiting.', true, None, winfo) %}
+    {{ post_button(url_for('appointment_cancel', aid=r.appointment_id), 'Cancel', 'btn small danger', 'Cancel appointment?') }}
+  {% endcall %}
+</section>
+<section class="card"><h2>History</h2>{{ data_table(history, hcols, 'No processed appointments yet.', false, None, hinfo) }}</section>
+{% endblock %}

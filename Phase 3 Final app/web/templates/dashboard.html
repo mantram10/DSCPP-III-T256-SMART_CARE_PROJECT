@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}{% block heading %}Dashboard{% endblock %}
+{% block content %}
+<div class="stats">
+  <a class="stat" href="{{ url_for('patients') }}"><b>{{ stats.patients }}</b><span>Patients</span></a>
+  <a class="stat" href="{{ url_for('doctors') }}"><b>{{ stats.doctors }}</b><span>Doctors</span></a>
+  <a class="stat" href="{{ url_for('appointments') }}"><b>{{ stats.appointments }}</b><span>Waiting appointments</span></a>
+  <a class="stat warn" href="{{ url_for('emergency') }}"><b>{{ stats.emergencies }}</b><span>Waiting emergencies</span></a>
+  <a class="stat" href="{{ url_for('records') }}"><b>{{ stats.records }}</b><span>Medical records</span></a>
+</div>
+<div class="grid2">
+  <section class="card">
+    <h2>Next appointment <small>queue front (FIFO)</small></h2>
+    {% if next_appt %}<p class="big">#{{ next_appt.appointment_id }}: {{ next_appt.patient_name or 'Patient ' ~ next_appt.patient_id }}</p>
+      <p class="muted">with {{ next_appt.doctor_name or 'Doctor ' ~ next_appt.doctor_id }}</p>
+    {% else %}<p class="empty">No appointments waiting.</p>{% endif %}
+  </section>
+  <section class="card">
+    <h2>Most urgent emergency <small>heap top</small></h2>
+    {% if next_emerg %}<p class="big">#{{ next_emerg.emergency_id }}: {{ next_emerg.patient_name or 'Patient ' ~ next_emerg.patient_id }}</p>
+      <p><span class="badge pr-{{ next_emerg.priority }}">{{ next_emerg.priority }} {{ priority_names.get(next_emerg.priority) }}</span></p>
+    {% else %}<p class="empty">No emergency cases waiting.</p>{% endif %}
+  </section>
+  <section class="card">
+    <h2>Patients by source</h2>
+    {% for s in by_source %}<div class="bar-row"><span class="badge {{ 'src-cloud' if s.source.startswith('FIREBASE') else 'src-local' }}">{{ s.source }}</span>
+      <div class="bar"><i style="width: {{ (100 * s.total / (stats.patients or 1))|round(1) }}%"></i></div><b>{{ s.total }}</b></div>
+    {% else %}<p class="empty">No patients yet.</p>{% endfor %}
+  </section>
+  <section class="card">
+    <h2>Recent actions <small>stack, newest first</small></h2>
+    {% for a in actions %}<p class="action">{{ a }}</p>{% else %}<p class="empty">No actions in this session yet.</p>{% endfor %}
+  </section>
+</div>
+{% endblock %}

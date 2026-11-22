@@ -1,0 +1,14 @@
+patient_id,name,age,gender
+120001,Karan Bhatt,4,M
+120002,Nidhi Bisht,17,F
+120003,Shreya Verma,17,F
+120004,Vivaan Rawat,11,M
+120005,Ankit Joshi,4,M
+120901,,30,F
+120902,Test Age,-4,M
+120903,Test Age,150,M
+120904,Test Gender,40,X
+110050,Wrong Range,40,F
+abc,Bad Id,40,F
+120001,Dup Id,40,M
+120905,Bad;Name,40,M

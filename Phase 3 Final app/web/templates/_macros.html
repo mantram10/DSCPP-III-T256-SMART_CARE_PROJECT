@@ -1,0 +1,46 @@
+{# Renders every column the database returns, so all fields are always shown. #}
+{% macro cell(col, value) -%}
+  {%- if value is none or value == '' -%}<span class="muted">—</span>
+  {%- elif col == 'status' -%}<span class="badge st-{{ value|lower }}">{{ value }}</span>
+  {%- elif col == 'priority' -%}<span class="badge pr-{{ value }}">{{ value }} {{ priority_names.get(value, '') }}</span>
+  {%- elif col == 'source' -%}<span class="badge {{ 'src-cloud' if value.startswith('FIREBASE') else 'src-local' }}">{{ value }}</span>
+  {%- elif col == 'gender' -%}{{ {'M':'Male','F':'Female','O':'Other'}.get(value|trim, value) }}
+  {%- else -%}{{ value }}{%- endif -%}
+{%- endmacro %}
+
+{% macro data_table(rows, cols, empty='No records found.', has_actions=false, row_class=None, info=None) -%}
+  {% if rows %}
+  <div class="table-wrap"><table>
+    <thead><tr>
+      {% for c in cols %}<th>{{ (c.replace('_', ' ')|title).replace(' Id', ' ID') if c != 'id' else 'ID' }}</th>{% endfor %}
+      {% if has_actions %}<th class="right">Actions</th>{% endif %}
+    </tr></thead>
+    <tbody>
+    {% for r in rows %}<tr{% if row_class %} class="row-{{ row_class }}-{{ r[row_class] }}"{% endif %}>
+      {% for c in cols %}<td>{{ cell(c, r[c]) }}</td>{% endfor %}
+      {% if has_actions %}<td class="right nowrap">{{ caller(r) }}</td>{% endif %}
+    </tr>{% endfor %}
+    </tbody>
+  </table></div>
+  {% if info %}{{ pager(info) }}{% else %}<p class="muted small">{{ rows|length }} row(s)</p>{% endif %}
+  {% else %}<p class="empty">{{ empty }}</p>{% endif %}
+{%- endmacro %}
+
+{% macro post_button(action, label, cls='btn', confirm=None) -%}
+<form method="post" action="{{ action }}" class="inline"{% if confirm %} onsubmit="return confirm('{{ confirm }}')"{% endif %}>
+  <input type="hidden" name="csrf" value="{{ csrf }}"><button class="{{ cls }}">{{ label }}</button>
+</form>
+{%- endmacro %}
+
+{% macro pager(info) -%}
+<div class="pager">
+  <span class="muted small">Showing {{ "{:,}".format(info.first) }}–{{ "{:,}".format(info.last) }} of {{ "{:,}".format(info.total) }}</span>
+  {% if info.pages > 1 %}<span class="pager-links">
+    {% if info.page > 1 %}<a class="btn small" href="{{ page_url(info.arg, 1) }}">First</a>
+    <a class="btn small" href="{{ page_url(info.arg, info.page - 1) }}">Previous</a>{% endif %}
+    <span class="small">Page {{ info.page }} of {{ "{:,}".format(info.pages) }}</span>
+    {% if info.page < info.pages %}<a class="btn small" href="{{ page_url(info.arg, info.page + 1) }}">Next</a>
+    <a class="btn small" href="{{ page_url(info.arg, info.pages) }}">Last</a>{% endif %}
+  </span>{% endif %}
+</div>
+{%- endmacro %}

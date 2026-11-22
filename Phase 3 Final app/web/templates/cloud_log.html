@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% from '_macros.html' import data_table with context %}
+{% block title %}Import Log{% endblock %}{% block heading %}Cloud Import Log <small>audit trail</small>{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="form-row">{% for s in summary %}<span class="badge st-{{ s.status|lower }}">{{ s.status }}: {{ s.total }}</span>{% endfor %}</div>
+  {{ data_table(rows, cols, 'No cloud imports yet.') }}
+</section>
+{% endblock %}

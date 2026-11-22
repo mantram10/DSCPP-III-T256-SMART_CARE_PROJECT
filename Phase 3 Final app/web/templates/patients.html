@@ -1,0 +1,28 @@
+{% extends 'base.html' %}{% from '_macros.html' import data_table, post_button with context %}
+{% block title %}Patients{% endblock %}{% block heading %}Patients{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Add patient</h2>
+  <form method="post" action="{{ url_for('patient_add') }}" class="form-row">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Patient ID<input name="patient_id" type="number" min="1" max="99999" required></label>
+    <label class="grow">Name<input name="name" maxlength="100" required></label>
+    <label>Age<input name="age" type="number" min="0" max="120" required></label>
+    <label>Gender<select name="gender" required><option value="M">Male</option><option value="F">Female</option><option value="O">Other</option></select></label>
+    <button class="btn primary">Add patient</button>
+  </form>
+  <p class="muted small">Local IDs are 1–99999. IDs 110001+ are reserved for cloud hospitals.</p>
+</section>
+<section class="card">
+  <form method="get" class="form-row">
+    <label class="grow">Search by ID (exact, hash lookup) or name<input name="q" value="{{ q }}" placeholder="e.g. 42 or Sharma"></label>
+    <label>Source<select name="source"><option value="">All</option>{% for s in sources %}<option {{ 'selected' if s == source }}>{{ s }}</option>{% endfor %}</select></label>
+    <button class="btn">Search</button>{% if q or source %}<a class="btn ghost" href="{{ url_for('patients') }}">Clear</a>{% endif %}
+  </form>
+  {% call(r) data_table(rows, cols, 'No patients found.', true, None, info) %}
+    <a class="btn small" href="{{ url_for('patient_detail', pid=r.patient_id) }}">View</a>
+    <a class="btn small" href="{{ url_for('patient_edit', pid=r.patient_id) }}">Edit</a>
+    {{ post_button(url_for('patient_delete', pid=r.patient_id), 'Delete', 'btn small danger', 'Delete patient ' ~ r.patient_id ~ '?') }}
+  {% endcall %}
+</section>
+{% endblock %}

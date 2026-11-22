@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Cloud Exchange{% endblock %}{% block heading %}Cloud Exchange <small>Firebase</small>{% endblock %}
+{% block content %}
+{% if problem %}<div class="flash error">Cloud is not configured: {{ problem }}</div>{% endif %}
+<div class="grid2">
+<section class="card">
+  <h2>Hospital account</h2>
+  {% if cloud_user %}
+    <p>Signed in as <b>{{ cloud_user.email }}</b></p>
+    <p>Hospital: <span class="badge src-cloud">{{ cloud_user.hospital or 'no hospital claim' }}</span></p>
+    <form method="post" action="{{ url_for('cloud_signout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="btn ghost">Sign out</button></form>
+  {% endif %}
+  <form method="post" action="{{ url_for('cloud_signin') }}" class="form-col">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Email<input name="email" type="email" placeholder="{{ cfg.default_email or 'hospital-b@smartcare.test' }}"></label>
+    <label>Password<input name="password" type="password" required></label>
+    <button class="btn primary">{{ 'Switch account' if cloud_user else 'Sign in' }}</button>
+    <p class="muted small">Leave email empty to use {{ cfg.default_email or 'the default account' }}.</p>
+  </form>
+</section>
+<section class="card">
+  <h2>Retrieve &amp; import</h2>
+  <p class="muted small">Records are validated first. You approve before anything is written to PostgreSQL.</p>
+  <form method="post" action="{{ url_for('cloud_preview') }}" class="form-row stack">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label class="grow">Hospital dataset<select name="which">{% for h in hospitals %}
+      <option value="{{ h }}" {{ 'selected' if cloud_user and cloud_user.hospital == h }}>{{ h }}{{ ' (mine)' if cloud_user and cloud_user.hospital == h }}</option>{% endfor %}
+    </select></label>
+    <button class="btn" {{ 'disabled' if not cloud_user }}>Retrieve</button>
+  </form>
+  <p class="muted small">Other hospitals’ datasets should be refused by the Firebase rules.</p>
+  <form method="post" action="{{ url_for('cloud_preview') }}" class="stack">
+    <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="which" value="shared">
+    <button class="btn primary wide" {{ 'disabled' if not cloud_user }}>Retrieve records shared with {{ cloud_user.hospital if cloud_user else 'my hospital' }}</button>
+  </form>
+</section>
+<section class="card">
+  <h2>Share a patient</h2>
+  <form method="post" action="{{ url_for('cloud_share') }}" class="form-col">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    {% set mine = cloud_user.hospital if cloud_user else '' %}
+    <label>Patient ID {% if mine in ranges %}<small>({{ ranges[mine][0] }}–{{ ranges[mine][1] }})</small>{% endif %}
+      <input name="patient_id" type="number" required></label>
+    <label>Share with<select name="target">{% for h in hospitals if h != mine %}<option>{{ h }}</option>{% endfor %}</select></label>
+    <label class="check"><input type="checkbox" name="consent" value="yes"> The patient has given consent to share this record</label>
+    <button class="btn primary" {{ 'disabled' if not cloud_user }}>Share</button>
+  </form>
+</section>
+<section class="card">
+  <h2>Revoke a share</h2>
+  <form method="post" action="{{ url_for('cloud_revoke') }}" class="form-col">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Patient ID<input name="patient_id" type="number" required></label>
+    <label>Shared with<select name="target">{% for h in hospitals if h != (cloud_user.hospital if cloud_user else '') %}<option>{{ h }}</option>{% endfor %}</select></label>
+    <button class="btn danger" {{ 'disabled' if not cloud_user }}>Revoke</button>
+    <p class="muted small">Copies already imported by the other hospital are not deleted.</p>
+  </form>
+</section>
+</div>
+{% endblock %}

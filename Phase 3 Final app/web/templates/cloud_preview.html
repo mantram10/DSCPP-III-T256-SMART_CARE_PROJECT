@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Validation report{% endblock %}{% block heading %}Cloud validation report{% endblock %}
+{% block content %}
+<section class="card">
+  <p class="muted">{{ path }}</p>
+  <div class="stats">
+    <div class="stat"><b>{{ rep.total }}</b><span>Received</span></div>
+    <div class="stat ok"><b>{{ rep.accepted|length }}</b><span>Approved</span></div>
+    <div class="stat warn"><b>{{ rep.issues|length }}</b><span>Rejected / skipped</span></div>
+  </div>
+  <form method="post" action="{{ url_for('cloud_import') }}" class="form-row">
+    <input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="which" value="{{ which }}">
+    {% if rep.accepted %}<button class="btn primary" name="approve" value="yes">Import {{ rep.accepted|length }} approved record(s) into PostgreSQL</button>{% endif %}
+    <button class="btn ghost" name="approve" value="no">Don’t import (log results only)</button>
+    <a class="btn ghost" href="{{ url_for('cloud_page') }}">Back</a>
+  </form>
+</section>
+{% if rep.accepted %}<section class="card"><h2>Approved</h2>
+  <div class="table-wrap"><table><thead><tr><th>Key</th><th>Patient ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Source hospital</th></tr></thead><tbody>
+  {% for p in rep.accepted %}<tr><td>{{ p.key }}</td><td>{{ p.patient_id }}</td><td>{{ p.name }}</td><td>{{ p.age }}</td><td>{{ p.gender }}</td><td>{{ p.source_hospital }}</td></tr>{% endfor %}
+  </tbody></table></div></section>{% endif %}
+{% if rep.issues %}<section class="card"><h2>Rejected / skipped</h2>
+  <div class="table-wrap"><table><thead><tr><th>Key</th><th>Patient ID</th><th>Status</th><th>Reason</th></tr></thead><tbody>
+  {% for i in rep.issues %}<tr><td>{{ i.key }}</td><td>{{ i.patient_id or '—' }}</td><td><span class="badge st-{{ i.status|lower }}">{{ i.status }}</span></td><td>{{ i.reason }}</td></tr>{% endfor %}
+  </tbody></table></div></section>{% endif %}
+{% endblock %}

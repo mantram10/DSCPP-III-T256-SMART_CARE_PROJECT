@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Hospital Network{% endblock %}{% block heading %}Hospital Network <small>BFS and DFS traversal</small>{% endblock %}
+{% block content %}
+{% set pos = {'City Hospital': (130, 70), 'Apollo Hospital': (360, 70), 'Fortis Hospital': (590, 70), 'Max Hospital': (590, 210), 'AIIMS': (130, 210)} %}
+<section class="card">
+  <form method="get" class="form-row">
+    <label class="grow">Start hospital<select name="start">{% for h in graph %}<option {{ 'selected' if h == start }}>{{ h }}</option>{% endfor %}</select></label>
+    <label>Algorithm<select name="algo"><option value="bfs" {{ 'selected' if algo == 'bfs' }}>BFS (queue)</option><option value="dfs" {{ 'selected' if algo == 'dfs' }}>DFS (stack)</option></select></label>
+    <button class="btn primary">Traverse</button>
+  </form>
+  <div class="table-wrap">
+  <svg viewBox="0 0 720 280" class="graph" role="img" aria-label="Hospital network graph">
+    {% for a, b in edges %}<line x1="{{ pos[a][0] }}" y1="{{ pos[a][1] }}" x2="{{ pos[b][0] }}" y2="{{ pos[b][1] }}"/>{% endfor %}
+    {% for h, xy in pos.items() %}
+      {% set step = (result.index(h) + 1) if result and h in result else None %}
+      <g class="node {{ 'visited' if step }}">
+        <circle cx="{{ xy[0] }}" cy="{{ xy[1] }}" r="30"/>
+        <text x="{{ xy[0] }}" y="{{ xy[1] + 5 }}" class="step">{{ step or '' }}</text>
+        <text x="{{ xy[0] }}" y="{{ xy[1] + 52 }}">{{ h }}</text>
+      </g>
+    {% endfor %}
+  </svg></div>
+  {% if result %}<p class="traversal"><b>{{ algo|upper }} from {{ start }}:</b> {{ result|join(' → ') }} → END</p>{% endif %}
+</section>
+<section class="card"><h2>Adjacency list</h2>
+  <div class="table-wrap"><table><thead><tr><th>Hospital</th><th>Connected to</th></tr></thead><tbody>
+  {% for h, n in graph.items() %}<tr><td>{{ h }}</td><td>{{ n|join(', ') }}</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+{% endblock %}

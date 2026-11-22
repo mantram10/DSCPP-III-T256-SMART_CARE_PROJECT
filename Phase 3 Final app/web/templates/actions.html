@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Recent Actions{% endblock %}{% block heading %}Recent Actions <small>last in, first out</small>{% endblock %}
+{% block content %}
+<section class="card">
+  {% for a in actions %}<p class="action"><span class="muted">{{ loop.index }}.</span> {{ a }}</p>
+  {% else %}<p class="empty">No actions in this session yet.</p>{% endfor %}
+  <p class="muted small">Like the C++ app, this history is kept in memory for the current session only.</p>
+</section>
+{% endblock %}
