@@ -1,5 +1,5 @@
 """
-Generates firebase/database.rules.json for every hospital in validation.py.
+Generates firebase/database.rules.json for every hospital in validation.py
 
     python python/make_firebase_rules.py
 Then paste the file into Firebase Console > Realtime Database > Rules > Publish.
